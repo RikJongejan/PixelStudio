@@ -19,6 +19,7 @@ class Grid {
     }
 
     getPixel(x, y) {
+        return this.pixels.find(p => p.x === x && p.y === y);
 
     }
 
@@ -28,6 +29,7 @@ class Grid {
     }
 
     clearAll() {
+        this.pixels.forEach(pixel => pixel.setColor('white'));
 
     }
 }
