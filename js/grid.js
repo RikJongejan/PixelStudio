@@ -1,8 +1,8 @@
 class Grid {
-    constructor(rows, cols, cellsize) {
+    constructor(rows, cols, cellSize) {
         this.rows = rows;
         this.cols = cols;
-        this.cellsize = cellsize;
+        this.cellSize = cellSize;
         this.pixels = [];
         this.createGrid();
     }
@@ -10,9 +10,9 @@ class Grid {
     createGrid() {
         for (let row = 0; row < this.rows; row++) {
             for (let col = 0; col < this.cols; col++) {
-                let x = col * this.cellsize;
-                let y = row * this.cellsize;
-                this.pixels.push(new Pixel(x, y, this.cellsize, 'white'));
+                let x = col * this.cellSize;
+                let y = row * this.cellSize;
+                this.pixels.push(new Pixel(x, y, this.cellSize, 'white'));
             }
         }
 
