@@ -18,7 +18,10 @@ class App {
 
     //handle events
     handleEvents() {
-
+        this.canvas.addEventListener('click', (event) => {
+            let rect = this.canvas.getBoundingClientRect();
+            let mouseX = event.clientX - rect.left;
+        })
     }
 
     //renderd de app/grid
