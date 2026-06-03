@@ -26,11 +26,22 @@ class App {
 
             let col = Math.floor(mouseX / this.cellSize);
             let row = Math.floor(mouseY / this.cellSize);
-        })
+
+            let x = col * this.cellSize;
+            let y = row * this.cellSize;
+            
+            let pixel = this.grid.getPixel(x, y);
+
+            if (pixel) {
+                this.currentTool.apply(pixel, this.selectedColor);
+                this.render();
+            }
+        });
     }
 
     //renderd de app/grid
     render() {
-
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.grid.render(this.ctx);
     }
 }
