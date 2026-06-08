@@ -4,7 +4,6 @@ class Pixel {
         this.y = y;
         this.size = size;
         this.color = color;
-
     }
 
     draw(ctx) {
