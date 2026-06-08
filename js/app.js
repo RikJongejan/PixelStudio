@@ -59,6 +59,13 @@ class App {
             this.render();
         });
 
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            let link = document.createElement('a');
+            link.download = 'pixelstudio.png';
+            link.href = this.canvas.toDataURL('image/png');
+            link.click();
+        });
+
         document.getElementById('gridSize').addEventListener('change', (e) => {
             let size = parseInt(e.target.value);
             this.cellSize = this.canvasSize / size;
