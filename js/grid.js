@@ -6,7 +6,7 @@ class Grid {
         this.pixels = [];
         this.createGrid();
     }
-    //maakt de grid
+
     createGrid() {
         for (let row = 0; row < this.rows; row++) {
             for (let col = 0; col < this.cols; col++) {
@@ -16,6 +16,7 @@ class Grid {
     }
 
     getPixel(x, y) {
+        // exacte vergelijking werkt omdat alle pixelposities veelvouden van cellSize zijn
         return this.pixels.find(p => p.x === x && p.y === y);
     }
 

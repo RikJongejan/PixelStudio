@@ -2,6 +2,7 @@ class App {
     constructor(rows, cols, cellSize) {
         this.canvas = document.getElementById('PixelCanvas');
         this.ctx = this.canvas.getContext('2d');
+        // vastgelegd zodat cellSize herberekend kan worden bij grid-wissel zonder het canvas te resizen
         this.canvasSize = cols * cellSize;
         this.cellSize = cellSize;
         this.canvas.width = this.canvasSize;
@@ -13,7 +14,7 @@ class App {
         this.isDrawing = false;
         this.hoveredPixel = null;
     }
-    //initialize de app
+
     init() {
         this.render();
         this.handleEvents();
@@ -26,7 +27,7 @@ class App {
             this.render();
         });
 
-        // hover en drag in één event — render maar één keer per move
+        // hover en applyTool samen afgehandeld zodat render maar één keer per mousemove wordt aangeroepen
         this.canvas.addEventListener('mousemove', (e) => {
             this.hoveredPixel = this.getPixelAt(e);
             if (this.isDrawing) this.applyTool(e);
@@ -38,6 +39,7 @@ class App {
             this.render();
         });
 
+        // op window ipv canvas: anders stopt tekenen niet als de muis buiten het canvas losgelaten wordt
         window.addEventListener('mouseup', () => {
             this.isDrawing = false;
         });
@@ -63,12 +65,14 @@ class App {
             let link = document.createElement('a');
             link.download = 'pixelstudio.png';
             link.href = this.canvas.toDataURL('image/png');
+            // click() triggert de download zonder dat de gebruiker een URL hoeft te openen
             link.click();
         });
 
         document.getElementById('gridSize').addEventListener('change', (e) => {
             let size = parseInt(e.target.value);
             this.cellSize = this.canvasSize / size;
+            // reset hoveredPixel zodat er geen verwijzing naar een pixel van het oude grid overblijft
             this.hoveredPixel = null;
             this.grid = new Grid(size, size, this.cellSize);
             this.render();
